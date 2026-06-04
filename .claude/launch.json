@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "bds-web",
+      "runtimeExecutable": "C:\\Program Files\\Python312\\python.exe",
+      "runtimeArgs": ["-m", "http.server", "8777", "--directory", "D:\\BĐS\\web"],
+      "port": 8777
+    }
+  ]
+}

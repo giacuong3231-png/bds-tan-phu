@@ -1,0 +1,19 @@
+# ============================================================================
+#  YEU CAU MOI TRUONG — App backtest BĐS căn hộ Tân Phú
+# ============================================================================
+#
+#  KHONG CAN CAI GI CA.
+#
+#  scripts/build_data.py viet hoan toan bang Python 3 STANDARD LIBRARY thuan
+#  (csv, json, math, datetime, pathlib, ...). Khong dung pandas/numpy hay bat
+#  ky thu vien ben thu ba nao, nen file nay KHONG liet ke dependency de cai.
+#
+#  Yeu cau duy nhat:
+#    - Python 3.8 tro len  (can dict giu thu tu chen + f-string)
+#
+#  Cach chay (xem README.md):
+#    python scripts/build_data.py
+#
+#  => Khong can `pip install -r requirements.txt`. File giu lai cho dong bo
+#     cau truc du an va de ghi ro: stdlib-only, zero dependency.
+# ============================================================================

@@ -1,0 +1,17 @@
+# Workspace trung gian của harness (không cần lên repo)
+_workspace/
+_workspace_prev/
+
+# Python
+__pycache__/
+*.pyc
+
+# Claude Code local
+.claude/settings.local.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node
+node_modules/

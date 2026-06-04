@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nhìn lại quá khứ — Mua căn hộ Tân Phú</title>
+  <meta name="description" content="Nếu bạn mua đứt một căn hộ ở Tân Phú từ ngày mở bán đến nay thì hôm nay lời/lỗ bao nhiêu? Mô phỏng với giá lịch sử theo m², thuế phí, và tiền cho thuê." />
+
+  <!-- Fonts: Inter (text) + JetBrains Mono (mọi con số, để chữ số không nhảy) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="./css/style.css" />
+
+  <!-- Apache ECharts (CDN) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+
+  <!-- App scripts (no build). Order matters: helpers/state before Alpine. -->
+  <script defer src="./js/data.js"></script>
+  <script defer src="./js/simulator.js"></script>
+  <script defer src="./js/chart.js"></script>
+  <script defer src="./js/app.js"></script>
+
+  <!-- Alpine.js LAST so backtestApp()/Simulator/BacktestChart already exist -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+</head>
+
+<body x-data="backtestApp()" x-cloak>
+
+  <!-- ░░░ Loading / error states ░░░ -->
+  <template x-if="!ready && !loadError">
+    <div class="boot">
+      <div class="boot-spinner"></div>
+      <p>Đang tải dữ liệu…</p>
+    </div>
+  </template>
+  <template x-if="loadError">
+    <div class="boot boot-error">
+      <p>Không tải được dữ liệu.</p>
+      <code x-text="loadError"></code>
+    </div>
+  </template>
+
+  <!-- ░░░ App shell (1 : 3 layout) ░░░ -->
+  <main class="app" x-show="ready">
+
+    <!-- ─────────── LEFT: controls ─────────── -->
+    <aside class="panel controls">
+      <header class="brand">
+        <h1>Nhìn lại quá khứ — Mua căn hộ Tân Phú</h1>
+        <p class="sub">Nếu mua đứt một căn từ ngày mở bán đến nay, hôm nay bạn lời hay lỗ?</p>
+      </header>
+
+      <!-- Time range -->
+      <section class="ctl-group">
+        <label class="ctl-label">Khoảng thời gian</label>
+        <div class="date-row">
+          <input class="num-input date" type="date" x-model="start" :min="minDate" :max="maxDate" @change="setRange()" />
+          <span class="date-sep">→</span>
+          <input class="num-input date" type="date" x-model="end" :min="minDate" :max="maxDate" @change="setRange()" />
+        </div>
+        <div class="chip-row">
+          <button class="chip" @click="quickRange(0)">Tất cả</button>
+          <button class="chip" @click="quickRange(10)">10 năm</button>
+          <button class="chip" @click="quickRange(5)">5 năm</button>
+          <button class="chip" @click="quickRange(3)">3 năm</button>
+          <button class="chip" @click="quickRange(1)">1 năm</button>
+        </div>
+      </section>
+
+      <!-- Presets -->
+      <section class="ctl-group">
+        <label class="ctl-label">Bộ sưu tập</label>
+        <div class="preset-row">
+          <template x-for="(list, name) in presets" :key="name">
+            <button class="preset" :class="{ active: activePreset === name }" @click="applyPreset(name)" x-text="name"></button>
+          </template>
+        </div>
+      </section>
+
+      <!-- Apartment picker grouped by group -->
+      <section class="ctl-group grow">
+        <label class="ctl-label">
+          Chọn căn hộ
+          <span class="count" x-text="tickers.length + '/8'"></span>
+        </label>
+        <div class="ticker-scroll">
+          <template x-for="g in groups" :key="g.group">
+            <div class="tier">
+              <div class="tier-label" x-text="g.label"></div>
+              <div class="tier-assets">
+                <template x-for="a in g.assets" :key="a.key">
+                  <button class="asset"
+                          :class="{ on: isSelected(a.key) }"
+                          :style="isSelected(a.key) ? ('--c:' + (colors[a.key]||'#4ea1ff')) : ''"
+                          @click="toggleTicker(a.key)">
+                    <span class="asset-dot" :style="isSelected(a.key) ? ('background:' + (colors[a.key]||'#4ea1ff')) : ''"></span>
+                    <span class="asset-name" x-text="a.name"></span>
+                  </button>
+                </template>
+              </div>
+            </div>
+          </template>
+        </div>
+      </section>
+
+      <!-- Toggles -->
+      <section class="ctl-group toggles">
+        <button class="toggle" :class="{ on: rentOn }" @click="toggleRent()">
+          <span class="toggle-knob"></span><span>Tính tiền cho thuê</span>
+        </button>
+        <button class="toggle" :class="{ on: realTerms }" @click="toggleRealTerms()">
+          <span class="toggle-knob"></span><span>Lợi nhuận thực (trừ lạm phát)</span>
+        </button>
+        <button class="toggle" :class="{ on: markersOn }" @click="toggleMarkers()">
+          <span class="toggle-knob"></span><span>Mốc sự kiện</span>
+        </button>
+      </section>
+    </aside>
+
+    <!-- ─────────── RIGHT: chart + summary ─────────── -->
+    <section class="panel stage">
+
+      <!-- Headline cards -->
+      <div class="cards" x-show="cards">
+        <div class="card">
+          <div class="card-label">Tổng vốn mua</div>
+          <div class="card-value" x-text="cards ? cards.cost : '—'"></div>
+        </div>
+        <div class="card">
+          <div class="card-label">Giá trị hiện tại</div>
+          <div class="card-value" x-text="cards ? cards.value : '—'"></div>
+        </div>
+        <div class="card" :class="cards && cards.up ? 'pos' : 'neg'">
+          <div class="card-label">% lãi ròng</div>
+          <div class="card-value mono" x-text="cards ? cards.profitPct : '—'"></div>
+        </div>
+        <div class="card" :class="cards && cards.up ? 'pos' : 'neg'">
+          <div class="card-label">Lãi ròng (VND)</div>
+          <div class="card-value" x-text="cards ? cards.profit : '—'"></div>
+        </div>
+      </div>
+
+      <!-- Chart toolbar -->
+      <div class="chart-bar">
+        <div class="chart-title">
+          <span>Giá trị căn hộ theo thời gian</span>
+          <span class="muted" x-text="'· ' + (cards ? cards.nTickers : 0) + ' căn' + (rentOn ? ' · gồm tiền thuê' : '') + (realTerms ? ' · giá trị thực' : '')"></span>
+        </div>
+        <button class="play-btn" :disabled="isPlaying" @click="play()">
+          <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+            <path d="M8 5v14l11-7z" fill="currentColor"/>
+          </svg>
+          <span x-text="isPlaying ? 'Đang chạy…' : 'Phát lại'"></span>
+        </button>
+      </div>
+
+      <!-- The chart -->
+      <div class="chart-wrap">
+        <div x-ref="chart" class="echart"></div>
+        <div class="empty-hint" x-show="tickers.length === 0">Chọn ít nhất một căn hộ để bắt đầu.</div>
+      </div>
+
+      <!-- Story panel + summary table -->
+      <div class="below">
+        <!-- Story (contextual, theo nhóm phân khu) -->
+        <div class="story" x-show="storyTicker && currentStory()">
+          <div class="story-head">
+            <span class="story-dot" :style="'background:' + (currentStory() ? currentStory().color : '#4ea1ff')"></span>
+            <span class="story-name" x-text="currentStory() ? currentStory().name : ''"></span>
+          </div>
+          <p class="story-text" x-text="currentStory() ? currentStory().story : ''"></p>
+          <div class="story-tabs" x-show="tickers.length > 1">
+            <template x-for="t in tickers" :key="t">
+              <button class="story-tab" :class="{ active: storyTicker === t }"
+                      :style="storyTicker === t ? ('--c:' + (colors[t]||'#4ea1ff')) : ''"
+                      @click="setStory(t)" x-text="(_dataset && _dataset.meta.assets[t] && _dataset.meta.assets[t].name) || t"></button>
+            </template>
+          </div>
+        </div>
+
+        <!-- Summary table -->
+        <div class="table-wrap">
+          <table class="summary">
+            <thead>
+              <tr>
+                <th class="left">Căn hộ</th>
+                <th>Vốn mua</th>
+                <th>Giá trị</th>
+                <th x-show="rentOn">Thuê lũy kế</th>
+                <th>% lãi ròng</th>
+                <th>CAGR</th>
+                <th>Giảm sâu nhất</th>
+              </tr>
+            </thead>
+            <tbody>
+              <template x-for="r in summaryRows" :key="r.key">
+                <tr @mouseenter="setStory(r.key)">
+                  <td class="left">
+                    <span class="row-dot" :style="'background:' + r.color"></span>
+                    <span class="row-name-main" x-text="r.name"></span>
+                  </td>
+                  <td class="mono" x-text="r.fCost"></td>
+                  <td class="mono" x-text="r.fValue"></td>
+                  <td class="mono dim" x-show="rentOn" x-text="r.fRent"></td>
+                  <td class="mono" :class="r.up ? 'pos' : 'neg'" x-text="r.fPct"></td>
+                  <td class="mono" :class="r.cagr >= 0 ? 'pos' : 'neg'" x-text="r.fCagr"></td>
+                  <td class="mono dim" x-text="r.fDd"></td>
+                </tr>
+              </template>
+              <tr x-show="summaryRows.length === 0">
+                <td class="left muted" :colspan="rentOn ? 7 : 6">Chưa có căn hộ nào được chọn.</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="disclaimer">
+            Số liệu mô phỏng từ giá lịch sử theo m² (đã gồm thuế mua, phí bảo trì, phí môi giới &amp; thuế khi bán; tiền cho thuê ước tính theo rental yield). Công cụ tham khảo quá khứ, không phải khuyến nghị đầu tư.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>

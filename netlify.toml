@@ -1,0 +1,9 @@
+# Netlify — app tĩnh, phục vụ thẳng thư mục web/ (dữ liệu đã build sẵn trong web/data/)
+[build]
+  publish = "web"
+  # Không cần build command: data/*.json đã được build_data.py sinh sẵn và commit.
+
+[[headers]]
+  for = "/data/*.json"
+  [headers.values]
+    Cache-Control = "public, max-age=300"

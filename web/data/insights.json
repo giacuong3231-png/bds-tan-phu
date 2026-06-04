@@ -1,0 +1,122 @@
+{
+  "Celadon · Ruby": {
+    "name": "Celadon City — Ruby",
+    "story": "Ruby là phân khu bàn giao sớm nhất của khu đô thị Celadon City (chủ đầu tư Gamuda Land, Malaysia) trên đường N1 - Tân Kỳ Tân Quý, quận Tân Phú. Nằm trong tổng thể ~82ha có công viên Sa Pa và hồ điều hòa, Ruby hưởng lợi từ hạ tầng nội khu hoàn chỉnh nên thanh khoản và giá thuê ổn định qua nhiều chu kỳ.",
+    "events": [
+      { "date": "2016-03-01", "label": "Bàn giao Ruby" },
+      { "date": "2021-08-01", "label": "Đỉnh sốt giá" },
+      { "date": "2022-09-01", "label": "Siết tín dụng BĐS" },
+      { "date": "2023-06-01", "label": "Vùng đáy giảm giá" }
+    ]
+  },
+  "Celadon · Emerald": {
+    "name": "Celadon City — Emerald",
+    "story": "Emerald là phân khu cao cấp hơn trong Celadon City do Gamuda Land phát triển, mở bán giai đoạn thị trường đang lên (2017) và bàn giao cuối 2019. Vị trí sát trục Tân Kỳ Tân Quý và mảng xanh trung tâm giúp Emerald giữ mặt bằng giá tốt, là nhóm 'trung - cao cấp' tiêu biểu của khu Tây Sài Gòn.",
+    "events": [
+      { "date": "2019-11-01", "label": "Bàn giao Emerald" },
+      { "date": "2021-08-01", "label": "Đỉnh sốt giá" },
+      { "date": "2022-09-01", "label": "Siết tín dụng BĐS" },
+      { "date": "2023-06-01", "label": "Vùng đáy giảm giá" }
+    ]
+  },
+  "Celadon · Diamond": {
+    "name": "Celadon City — Diamond Alnata",
+    "story": "Diamond (Diamond Alnata / Alnata Plus) là phân khu cao cấp nhất Celadon City, do Gamuda Land cùng đối tác phát triển, bàn giao giai đoạn 2022. Đây là dòng căn hộ định vị cao cấp với giá mỗi m² thuộc nhóm cao nhất khu Tân Phú, biến động mạnh theo chu kỳ siết tín dụng 2022-2023.",
+    "events": [
+      { "date": "2022-04-01", "label": "Bàn giao Diamond" },
+      { "date": "2021-08-01", "label": "Đỉnh sốt giá" },
+      { "date": "2022-09-01", "label": "Siết tín dụng BĐS" },
+      { "date": "2023-06-01", "label": "Vùng đáy giảm giá" }
+    ]
+  },
+  "RichStar Novaland": {
+    "name": "RichStar Residence (Novaland)",
+    "story": "RichStar là khu căn hộ phức hợp của Novaland trên đường Hòa Bình, quận Tân Phú, gồm nhiều block bàn giao từ 2018. Là sản phẩm trung cấp ở khu vực dân cư đông đúc gần Đầm Sen, RichStar có nhu cầu ở thực và cho thuê cao, nhưng cũng chịu ảnh hưởng tâm lý khi nhóm cổ phiếu - trái phiếu Novaland gặp khó cuối 2022.",
+    "events": [
+      { "date": "2018-11-01", "label": "Bàn giao RichStar" },
+      { "date": "2021-08-01", "label": "Đỉnh sốt giá" },
+      { "date": "2022-09-01", "label": "Siết tín dụng BĐS" },
+      { "date": "2023-06-01", "label": "Vùng đáy giảm giá" }
+    ]
+  },
+  "Melody Residences": {
+    "name": "Melody Residences (Hưng Thịnh)",
+    "story": "Melody Residences do Hưng Thịnh phát triển trên đường Âu Cơ, quận Tân Phú, bàn giao giữa 2017. Là một trong những dự án trung cấp lên sóng sớm của khu Tây, Melody có vị trí mặt tiền thuận tiện, nhu cầu cho thuê tốt nhờ gần trung tâm Tân Bình - Tân Phú.",
+    "events": [
+      { "date": "2017-07-01", "label": "Bàn giao Melody" },
+      { "date": "2021-08-01", "label": "Đỉnh sốt giá" },
+      { "date": "2022-09-01", "label": "Siết tín dụng BĐS" },
+      { "date": "2023-06-01", "label": "Vùng đáy giảm giá" }
+    ]
+  },
+  "Oriental Plaza": {
+    "name": "Oriental Plaza",
+    "story": "Oriental Plaza nằm trên đường Âu Cơ, quận Tân Phú, bàn giao 2017 ở phân khúc giá mềm. Vị trí mặt tiền đường lớn và mức giá vào hợp lý giúp dự án có tỷ suất cho thuê thuộc nhóm hấp dẫn của khu vực, phù hợp nhà đầu tư dòng tiền.",
+    "events": [
+      { "date": "2017-04-01", "label": "Bàn giao Oriental Plaza" },
+      { "date": "2021-08-01", "label": "Đỉnh sốt giá" },
+      { "date": "2022-09-01", "label": "Siết tín dụng BĐS" },
+      { "date": "2023-06-01", "label": "Vùng đáy giảm giá" }
+    ]
+  },
+  "Carillon 7": {
+    "name": "Carillon 7 (TTC Land)",
+    "story": "Carillon 7 thuộc dòng căn hộ Carillon của TTC Land (tiền thân Sacomreal), tọa lạc khu Đầm Sen - Tân Phú, bàn giao 2020. Thiết kế tối ưu diện tích nhỏ - vừa giúp giá mỗi căn dễ tiếp cận, thanh khoản cho thuê tốt ở khu dân cư đông.",
+    "events": [
+      { "date": "2020-07-01", "label": "Bàn giao Carillon 7" },
+      { "date": "2021-08-01", "label": "Đỉnh sốt giá" },
+      { "date": "2022-09-01", "label": "Siết tín dụng BĐS" },
+      { "date": "2023-06-01", "label": "Vùng đáy giảm giá" }
+    ]
+  },
+  "Carillon 5": {
+    "name": "Carillon 5 (TTC Land)",
+    "story": "Carillon 5 là dự án cùng dòng Carillon của TTC Land tại khu Tân Phú - Tân Bình, bàn giao cuối 2018. Sản phẩm trung cấp với cộng đồng cư dân ổn định, nhu cầu ở thực và cho thuê đều, giá vào mềm hơn các phân khu Celadon lân cận.",
+    "events": [
+      { "date": "2018-12-01", "label": "Bàn giao Carillon 5" },
+      { "date": "2021-08-01", "label": "Đỉnh sốt giá" },
+      { "date": "2022-09-01", "label": "Siết tín dụng BĐS" },
+      { "date": "2023-06-01", "label": "Vùng đáy giảm giá" }
+    ]
+  },
+  "ResGreen Tower": {
+    "name": "ResGreen Tower",
+    "story": "ResGreen Tower là dự án căn hộ tại khu Tân Phú, bàn giao 2020 ở phân khúc trung cấp. Quy mô vừa phải, hướng tới khách mua ở thực trong khu dân cư hiện hữu; giá mỗi m² thuộc nhóm phải chăng so với mặt bằng khu Tây Sài Gòn.",
+    "events": [
+      { "date": "2020-10-01", "label": "Bàn giao ResGreen" },
+      { "date": "2021-08-01", "label": "Đỉnh sốt giá" },
+      { "date": "2022-09-01", "label": "Siết tín dụng BĐS" },
+      { "date": "2023-06-01", "label": "Vùng đáy giảm giá" }
+    ]
+  },
+  "Lotus Garden": {
+    "name": "Lotus Garden",
+    "story": "Lotus Garden là khu căn hộ đời đầu ở quận Tân Phú, bàn giao từ 2012 - thuộc thế hệ dự án sớm nhất trong dữ liệu. Trải qua trọn một chu kỳ từ nền giá thấp 2010-2013 đến đỉnh 2021, Lotus Garden cho thấy biên độ tăng giá dài hạn lớn và tỷ suất cho thuê cao nhờ giá vốn rẻ.",
+    "events": [
+      { "date": "2012-03-01", "label": "Bàn giao Lotus Garden" },
+      { "date": "2021-08-01", "label": "Đỉnh sốt giá" },
+      { "date": "2022-09-01", "label": "Siết tín dụng BĐS" },
+      { "date": "2023-06-01", "label": "Vùng đáy giảm giá" }
+    ]
+  },
+  "Tecco Đầm Sen": {
+    "name": "Tecco Town Đầm Sen",
+    "story": "Tecco Town (Tecco Group) nằm gần công viên văn hóa Đầm Sen, quận Tân Phú, bàn giao cuối 2021 - đúng giai đoạn thị trường tạo đỉnh rồi đảo chiều. Là dự án giá mềm, biên lợi nhuận tính từ lúc mở bán mỏng hơn vì vào thị trường muộn, độ tin cậy dữ liệu giá ở mức thấp.",
+    "events": [
+      { "date": "2021-12-01", "label": "Bàn giao Tecco" },
+      { "date": "2021-08-01", "label": "Đỉnh sốt giá" },
+      { "date": "2022-09-01", "label": "Siết tín dụng BĐS" },
+      { "date": "2023-06-01", "label": "Vùng đáy giảm giá" }
+    ]
+  },
+  "An Gia Garden": {
+    "name": "An Gia Garden",
+    "story": "An Gia Garden (An Gia Investment) tại quận Tân Phú, bàn giao giữa 2016 ở phân khúc trung cấp - giá mềm. Vị trí trong khu dân cư hiện hữu, nhu cầu cho thuê ổn định, là lựa chọn dòng tiền với suất đầu tư vừa phải.",
+    "events": [
+      { "date": "2016-06-01", "label": "Bàn giao An Gia" },
+      { "date": "2021-08-01", "label": "Đỉnh sốt giá" },
+      { "date": "2022-09-01", "label": "Siết tín dụng BĐS" },
+      { "date": "2023-06-01", "label": "Vùng đáy giảm giá" }
+    ]
+  }
+}
